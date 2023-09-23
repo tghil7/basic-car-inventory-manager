@@ -149,7 +149,7 @@ def addInventory(list):
     make = input ("Please enter the new vehicle's make: ")
     model = input ("Please enter the new vehicle's model: ")
     stockId = input ("Please enter the new vehicle's stock ID: ")
-    vehicleType = input ("Please enter the new vehicle's type:")
+    vehicleType = input ("Please enter the new vehicle's type R - Regulatr, E - Electric, H - Hybrid:")
     VIN = input ("Please enter the new vehicle's VIN: ")
     odometer = input ("Please enter the new vehicle's odometer:")
     year = input ("Please enter the new vehicle's year: ")
@@ -164,6 +164,9 @@ def addInventory(list):
         new_vehicle = ElectricVehicle (stockId, VIN, vehicleType, year, make, model, odometer, price, batterySize)
     list.append(new_vehicle)
     print ('Vehicle successfully added: ' +" " + new_vehicle.getYear() + ' ' + new_vehicle.getMake() + " " + new_vehicle.getModel())
+
+
+
 
 #Display all the vehicles currently stored in the inventory
 def dispInventory(list):
