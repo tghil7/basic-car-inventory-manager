@@ -148,22 +148,22 @@ def addInventory(list):
     # Request to input all the attributes from the vehicle being added. 
     make = input ("Please enter the new vehicle's make: ")
     model = input ("Please enter the new vehicle's model: ")
-    stockId = input ("Please enter the new vehicle's stock ID: ")
+    stockId = int(input ("Please enter the new vehicle's stock ID: "))
     vehicleType = input ("Please enter the new vehicle's type R - Regular, E - Electric, H -Hybrid:")
     VIN = input ("Please enter the new vehicle's VIN: ")
-    odometer = input ("Please enter the new vehicle's odometer:")
-    year = input ("Please enter the new vehicle's year: ")
-    price = input ("Please enter the new vehicle's price: ")
+    odometer = int(input ("Please enter the new vehicle's odometer:"))
+    year = int(input ("Please enter the new vehicle's year: "))
+    price = int(input ("Please enter the new vehicle's price: "))
     if vehicleType == 'R': #Create a regular vehicle if the vehicle type entered is 'R'
         new_vehicle = Vehicle (stockId, VIN, vehicleType, year, make, model, odometer, price)
     elif vehicleType == 'H': #Create a hybrid vehicle if the vehicle type entered is 'H'
-        mpg = input('Please enter the mpg of this vehicle: ')
+        mpg = int(input('Please enter the mpg of this vehicle: '))
         new_vehicle = HybridVehicle (stockId, VIN, vehicleType, year, make, model, odometer, price, mpg)
     if vehicleType == 'E': #Create an electric vehicle if the vehicle type entered is 'E'
         batterySize = input('Please enter the battery size of this vehicle: ')
         new_vehicle = ElectricVehicle (stockId, VIN, vehicleType, year, make, model, odometer, price, batterySize)
     list.append(new_vehicle)
-    print ('Vehicle successfully added: ' +" " + new_vehicle.getYear() + ' ' + new_vehicle.getMake() + " " + new_vehicle.getModel())
+    print ('Vehicle successfully added: ' +" " + str(new_vehicle.getYear()) + ' ' + new_vehicle.getMake() + " " + new_vehicle.getModel())
 
 
 
@@ -195,7 +195,7 @@ def updatePrice(list):
             #Get all valid inventory numbers
             inventory_numbers = []
             for item in list:
-                inventory_numbers.append(int(item.getStockId()))
+                inventory_numbers.append(item.getStockId())
             if inventory_id not in inventory_numbers:
                 raise ValueError ('Invalid inventory number. Please enter a valid inventory number.')
             # If the input is valid, break out of the loop
