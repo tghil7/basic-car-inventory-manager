@@ -171,8 +171,9 @@ def addInventory(list):
 #Display all the vehicles currently stored in the inventory
 def dispInventory(list):
     print ('                                       VEHICLE INVENTORY REPORT                                  ')
-    print(f"{'Make':<10} {'Model':<10} {'Year':<10} {'Stock ID':<10} {'VIN':<15} {'Type':<10} {'Odometer':<10} {'Price':<10} {'Battery':<10} {'MPG'}")
     print()
+    print(f"{'Make':<10} {'Model':<10} {'Year':<10} {'Stock ID':<10} {'VIN':<15} {'Type':<10} {'Odometer':<10} {'Price':<10} {'Battery':<10} {'MPG'}")
+   
     for item in list:
         if item.getVehicleType() == 'R':  #Display the details of a regular vehicle if the item is a regular vehicle
             new_vehicle = Vehicle(item.getStockId(), item.getVin(), item.getVehicleType(), item.getYear(), item.getMake(), item.getModel(), item.getOdometer(), item.getPrice())
@@ -183,7 +184,7 @@ def dispInventory(list):
         elif item.getVehicleType() == 'H':  #Display the details of a hybrid vehicle if the item is an hybrid vehicle
             new_vehicle = HybridVehicle(item.getStockId(), item.getVin(), item.getVehicleType(), item.getYear(), item.getMake(), item.getModel(), item.getOdometer(), item.getPrice(), item.getMpg())
             new_vehicle.showDescription()
-
+    print()
     print ('------------------------------- END OF INVENTORY REPORT -------------------------------------------')
 
 def updatePrice(list):
