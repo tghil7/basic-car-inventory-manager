@@ -171,8 +171,8 @@ def addInventory(list):
 #Display all the vehicles currently stored in the inventory
 def dispInventory(list):
     print ('                                       VEHICLE INVENTORY REPORT                                  ')
-    print(f"{'Make':<10} {'Model':<10} {'Year':<10} {'stock  ID':<10} {'VIN':<15} {'Type':<10} {'Odometer':<10} {'Price':<10} {'Battery':<10} {'MPG'}")
-
+    print(f"{'Make':<10} {'Model':<10} {'Year':<10} {'Stock ID':<10} {'VIN':<15} {'Type':<10} {'Odometer':<10} {'Price':<10} {'Battery':<10} {'MPG'}")
+    print()
     for item in list:
         if item.getVehicleType() == 'R':  #Display the details of a regular vehicle if the item is a regular vehicle
             new_vehicle = Vehicle(item.getStockId(), item.getVin(), item.getVehicleType(), item.getYear(), item.getMake(), item.getModel(), item.getOdometer(), item.getPrice())
@@ -194,7 +194,8 @@ def updatePrice(list):
             #Get all valid inventory numbers
             inventory_numbers = []
             for item in list:
-                inventory_numbers.append (item.getStockId())
+                inventory_numbers.append(int(item.getStockId()))
+            print (inventory_numbers)
             if inventory_id not in inventory_numbers:
                 raise ValueError ('Invalid inventory number. Please enter a valid inventory number.')
             # If the input is valid, break out of the loop
@@ -207,7 +208,7 @@ def updatePrice(list):
     for item in list:
         if item.getStockId() == inventory_id:  #Check that this is the correct item to update, and then change the price
             item.setPrice(new_price)
-            print('Price of vehicle with inventory number ' + str(inventory_id)  + 'updated successfully!') # Print success message
+            print('Price of vehicle with inventory number ' + str(inventory_id)  + ' updated successfully!') # Print success message
         
     
             
