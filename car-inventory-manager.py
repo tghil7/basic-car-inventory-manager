@@ -1,10 +1,6 @@
 import datetime;
 
 
-
-
-
-
 class Vehicle():
     __stockID: int
     __vin: str
