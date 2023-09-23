@@ -125,8 +125,8 @@ def getInput():
         try:
             selection = int(input ('Please select from the following options: \n [1] Display Inventory             [2] Add a new vehicle              [3] Update an existing vehicle   [4]Delete an existing vehicle    [5] Exit\n'))
             # Check if the input is valid
-            if selection not in range(1,4):
-                raise ValueError ('Invalid inventory number. Please enter a number between 1 and 4.')
+            if selection not in range(1,6):
+                raise ValueError ('Invalid selection. Please enter a number between 1 and 5.')
             # If the input is valid, break out of the loop
             break
         except ValueError as e:
@@ -144,7 +144,14 @@ def addInventory(list):
     odometer = input ("Please enter the new vehicle's odometer:")
     year = input ("Please enter the new vehicle's year: ")
     price = input ("Please enter the new vehicle's price: ")
-    new_vehicle = Vehicle (stockId, VIN, vehicleType, year, make, model, odometer, price)
+    if vehicleType == 'R': #Create a regular vehicle if the vehicle type entered is 'R'
+        new_vehicle = Vehicle (stockId, VIN, vehicleType, year, make, model, odometer, price)
+    elif vehicleType == 'H': #Create a hybrid vehicle if the vehicle type entered is 'H'
+        mpg = input('Please enter the mpg of this vehicle: ')
+        new_vehicle = HybridVehicle (stockId, VIN, vehicleType, year, make, model, odometer, price, mpg)
+    if vehicleType == 'E': #Create an electric vehicle if the vehicle type entered is 'E'
+        batterySize = input('Please enter the battery size of this vehicle: ')
+        new_vehicle = ElectricVehicle (stockId, VIN, vehicleType, year, make, model, odometer, price, batterySize)
     list.append(new_vehicle)
     print ('Vehicle successfully added: ' +" " + new_vehicle.getYear() + ' ' + new_vehicle.getMake() + " " + new_vehicle.getModel())
 
@@ -152,13 +159,13 @@ def dispInventory(list):
     print ('                                VEHICLE INVENTORY REPORT                            ')
     print ('Make     Model       Year    stock  ID          VIN           Type           Odometer       Price    Battery    MPG')
     for item in list:
-        if item.getVehicleType() == 'R':  
+        if item.getVehicleType() == 'R':  #Display the details of a regular vehicle if the item is a regular vehicle
             new_vehicle = Vehicle(item.getStockId(), item.getVin(), item.getVehicleType(), item.getYear(), item.getMake(), item.getModel(), item.getOdometer(), item.getPrice())
             new_vehicle.showDescription()
-        elif item.getVehicleType() == 'E':  
+        elif item.getVehicleType() == 'E':  #Display the details of an electric vehicle if the item is an electric vehicle
             new_vehicle = ElectricVehicle(item.getStockId(), item.getVin(), item.getVehicleType(), item.getYear(), item.getMake(), item.getModel(), item.getOdometer(), item.getPrice(), item.getBatterySize())
             new_vehicle.showDescription()
-        elif item.getVehicleType() == 'H':  
+        elif item.getVehicleType() == 'H':  #Display the details of a hybrid vehicle if the item is an hybrid vehicle
             new_vehicle = HybridVehicle(item.getStockId(), item.getVin(), item.getVehicleType(), item.getYear(), item.getMake(), item.getModel(), item.getOdometer(), item.getPrice(), item.getMpg())
             new_vehicle.showDescription()
 
@@ -166,9 +173,17 @@ def dispInventory(list):
 
 def updatePrice(list):
     #Initialize the inventory_id
-    inventory_id = ''
-    
-    inventory_id = input('Please enter the inventory number to update: ')
+    while True:
+        try:
+            inventory_id = input('Please enter the inventory number to update: ')
+            if inventory_id not in range(1,6):
+                raise ValueError ('Invalid inventory number. Please enter a valid inventory number.')
+            # If the input is valid, break out of the loop
+            break
+        except ValueError as e:
+            #Handle the invalid input by displaying the error message
+            print (e)
+            continue
     new_price = input ('Please enter new price for inventory ' + str(inventory_id) + ' :')
     for item in list:
         if item.getStockId() == int(inventory_id):
@@ -179,7 +194,17 @@ def updatePrice(list):
             
 
 def deleteInventory(list):
-    inventory_id = input('Please enter the inventory number to delete: ')
+    while True:
+        try:
+            inventory_id = input('Please enter the inventory number to delete: ')
+            if inventory_id not in range(1,6):
+                raise ValueError ('Invalid inventory number. Please enter a number between 1 and 4.')
+            # If the input is valid, break out of the loop
+            break
+        except ValueError as e:
+            #Handle the invalid input by displaying the error message
+            print (e)
+            continue
     for item in list:
         if item.getStockId() == int(inventory_id):
             list.remove(item)
