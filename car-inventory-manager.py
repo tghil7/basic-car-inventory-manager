@@ -172,11 +172,14 @@ def dispInventory(list):
     print ('------------------------------- END OF INVENTORY REPORT -------------------------------------------')
 
 def updatePrice(list):
-    #Initialize the inventory_id
     while True:
         try:
-            inventory_id = input('Please enter the inventory number to update: ')
-            if inventory_id not in range(1,6):
+            inventory_id = int(input('Please enter the inventory number to update: '))
+            #Get all valid inventory numbers
+            inventory_numbers = []
+            for item in list:
+                inventory_numbers.append (item.getStockId())
+            if inventory_id not in inventory_numbers:
                 raise ValueError ('Invalid inventory number. Please enter a valid inventory number.')
             # If the input is valid, break out of the loop
             break
@@ -186,9 +189,9 @@ def updatePrice(list):
             continue
     new_price = input ('Please enter new price for inventory ' + str(inventory_id) + ' :')
     for item in list:
-        if item.getStockId() == int(inventory_id):
+        if item.getStockId() == inventory_id:
             item.setPrice(new_price)
-            print('Price updated successfully!')
+            print('Price of vehicle with inventory number ' + str(inventory_id)  + 'updated successfully!')
         
     
             
@@ -196,9 +199,12 @@ def updatePrice(list):
 def deleteInventory(list):
     while True:
         try:
-            inventory_id = input('Please enter the inventory number to delete: ')
-            if inventory_id not in range(1,6):
-                raise ValueError ('Invalid inventory number. Please enter a number between 1 and 4.')
+            inventory_id = int(input('Please enter the inventory number to delete: '))
+            inventory_numbers = []
+            for item in list:
+                inventory_numbers.append (item.getStockId())
+            if inventory_id not in inventory_numbers:
+                raise ValueError ('Invalid inventory number. Please enter a valid inventory number')
             # If the input is valid, break out of the loop
             break
         except ValueError as e:
@@ -208,18 +214,18 @@ def deleteInventory(list):
     for item in list:
         if item.getStockId() == int(inventory_id):
             list.remove(item)
-            print('Inventory ' + inventory_id + ' removed successfully!')
+            print('Inventory ' + str(inventory_id) + ' removed successfully!')
 
 
 
 def main():
     print ("************************************************");
-    print ('*\t\tAnicet Akanza                  *');
+    print ('*\t\tAnicet Akanza                   *');
     print ('* IS826: Application Programming                *');
     print ('* Assignment 6: Vehicle Inventory               *');
     print ('* Date:'+ datetime.datetime.now().strftime('%x') + "                                 *"); #Conversion of the current date to the local format
     print ('* This program manages an inventory of vehicles.*');
-    print('*The user can, update or remove vehicles.       5*');
+    print('*The user can, update or remove vehicles.       *');
     print ('*He can also display all the vehicles available.*');
     print ("************************************************");
     print ()
