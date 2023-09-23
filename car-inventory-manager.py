@@ -1,7 +1,8 @@
 import datetime;
 
-
+#Super class Vehicle that contains the basic attributes and methods of a vehicle.
 class Vehicle():
+    # Vehicle class attributes
     __stockID: int
     __vin: str
     __vehicleType: str
@@ -11,6 +12,8 @@ class Vehicle():
     __odometer: int
     __price: int
 
+
+    #Basic methods to get the hidden attributes
     def getStockId(self):
         return self.__stockID
     
@@ -61,6 +64,8 @@ class Vehicle():
     def setPrice (self, price):
         self.__price = price
 
+
+    # Constructor for the Vehicle class
     def __init__(self, stockID, vin, vehicleType, year, make, model, odometer, price):
         self.__stockID = stockID
         self.__vin = vin
@@ -71,14 +76,16 @@ class Vehicle():
         self.__odometer = odometer
         self.__price = price
 
+    #Method to display all the attributes of the each object created from the class Vehicle. 
     def showDescription(self):  
        #Format the description and display
        output = f"{self.getMake():<10} {self.getModel():<10} {self.getYear():<10} {self.getStockId():<10} {self.getVin():<15} {self.getVehicleType():<10} {self.getOdometer():<10} {self.getPrice():<10}"
        print(output)
 
         
-
+#Sub class ElectricVehicle inherits from parent class Vehicle
 class ElectricVehicle(Vehicle):
+    # Attribute and getter/setter specific to the class ElectricVehicle
     __batterySize: str
 
     def getBatterySize(self):
@@ -87,6 +94,7 @@ class ElectricVehicle(Vehicle):
     def setBatterySize(self, size):
         self.__batterySize = size
 
+    # Constructor for the class ElectricVehicle
     def __init__(self, stockID, vin, vehicleType, year, make, model, odometer, price, batterySize):
         Vehicle.__init__(self,stockID, vin, vehicleType, year, make, model, odometer, price)
         self.__batterySize = batterySize
@@ -137,6 +145,7 @@ def getInput():
     return selection
 
 def addInventory(list):
+    # Request to input all the attributes from the vehicle being added. 
     make = input ("Please enter the new vehicle's make: ")
     model = input ("Please enter the new vehicle's model: ")
     stockId = input ("Please enter the new vehicle's stock ID: ")
@@ -156,8 +165,9 @@ def addInventory(list):
     list.append(new_vehicle)
     print ('Vehicle successfully added: ' +" " + new_vehicle.getYear() + ' ' + new_vehicle.getMake() + " " + new_vehicle.getModel())
 
+#Display all the vehicles currently stored in the inventory
 def dispInventory(list):
-    print ('  {                              VEHICLE INVENTORY REPORT                            ')
+    print ('                                       VEHICLE INVENTORY REPORT                                  ')
     print(f"{'Make':<10} {'Model':<10} {'Year':<10} {'stock  ID':<10} {'VIN':<15} {'Type':<10} {'Odometer':<10} {'Price':<10} {'Battery':<10} {'MPG'}")
 
     for item in list:
@@ -174,6 +184,7 @@ def dispInventory(list):
     print ('------------------------------- END OF INVENTORY REPORT -------------------------------------------')
 
 def updatePrice(list):
+    #Loop to validate the inventory input from the user
     while True:
         try:
             inventory_id = int(input('Please enter the inventory number to update: '))
@@ -189,16 +200,17 @@ def updatePrice(list):
             #Handle the invalid input by displaying the error message
             print (e)
             continue
-    new_price = input ('Please enter new price for inventory ' + str(inventory_id) + ' :')
+    new_price = input ('Please enter new price for inventory ' + str(inventory_id) + ' :') # Get the new price to store for the item with the inventory entered.
     for item in list:
-        if item.getStockId() == inventory_id:
+        if item.getStockId() == inventory_id:  #Check that this is the correct item to update, and then change the price
             item.setPrice(new_price)
-            print('Price of vehicle with inventory number ' + str(inventory_id)  + 'updated successfully!')
+            print('Price of vehicle with inventory number ' + str(inventory_id)  + 'updated successfully!') # Print success message
         
     
             
-
+# Method to remove an item from the inventory
 def deleteInventory(list):
+     #Loop to validate the inventory input from the user
     while True:
         try:
             inventory_id = int(input('Please enter the inventory number to delete: '))
@@ -214,13 +226,14 @@ def deleteInventory(list):
             print (e)
             continue
     for item in list:
-        if item.getStockId() == int(inventory_id):
+        if item.getStockId() == inventory_id: #Get the correct inventory item from the list and remove it
             list.remove(item)
-            print('Inventory ' + str(inventory_id) + ' removed successfully!')
+            print('Inventory ' + str(inventory_id) + ' removed successfully!') # Print a removal success message. 
 
 
 
 def main():
+    # Print the program header and description
     print ("************************************************");
     print ('*\t\tAnicet Akanza                   *');
     print ('* IS826: Application Programming                *');
@@ -232,7 +245,7 @@ def main():
     print ("************************************************");
     print ()
     print ()
-    print('WELCOME TO VEHICLE INVENTORY MANAGEMENT SYSTEM')
+    print('             WELCOME TO VEHICLE INVENTORY MANAGEMENT SYSTEM             ')
     print ()
     
     #Create my inventory list.
@@ -245,9 +258,10 @@ def main():
     inventory.append(honda)
     inventory.append(volvo)
     # Initialize the selection, and create a loop to prompt the user
-    selection = 0;
+    selection = 0; 
 
     while (selection != 5):
+        #Get the input from the user and compare with each option to continue with the correct step requeste by the user
         selection = getInput()
         match selection:
             case 1:
