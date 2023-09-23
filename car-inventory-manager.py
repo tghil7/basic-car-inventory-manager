@@ -149,7 +149,7 @@ def addInventory(list):
     make = input ("Please enter the new vehicle's make: ")
     model = input ("Please enter the new vehicle's model: ")
     stockId = input ("Please enter the new vehicle's stock ID: ")
-    vehicleType = input ("Please enter the new vehicle's type R - Regulatr, E - Electric, H - Hybrid:")
+    vehicleType = input ("Please enter the new vehicle's type R - Regular, E - Electric, H -Hybrid:")
     VIN = input ("Please enter the new vehicle's VIN: ")
     odometer = input ("Please enter the new vehicle's odometer:")
     year = input ("Please enter the new vehicle's year: ")
