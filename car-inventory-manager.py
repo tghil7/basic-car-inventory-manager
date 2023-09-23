@@ -76,8 +76,10 @@ class Vehicle():
         self.__price = price
 
     def showDescription(self):  
-        print (self.__make + '     ' + self.__model + "       " + str (self.__year) + "     " + str(self.__stockID) + '      ' + self.__vin + '     ' + self.__vehicleType + '  ' + 
-               str(self.__odometer) + '   ' + str(self.__price))
+       #Format the description and display
+       output = f"{self.getMake():<10} {self.getModel():<10} {self.getYear():<10} {self.getStockId():<10} {self.getVin():<15} {self.getVehicleType():<10} {self.getOdometer():<10} {self.getPrice():<10}"
+       print(output)
+
         
 
 class ElectricVehicle(Vehicle):
@@ -94,8 +96,10 @@ class ElectricVehicle(Vehicle):
         self.__batterySize = batterySize
 
     def showDescription(self):
-        print (self.getMake() + '     ' + self.getModel() + "       " + str (self.getYear()) + "     " + str(self.getStockId()) + '      ' + self.getVin() + '     ' + self.getVehicleType() + '  ' + 
-               str(self.getOdometer()) + '   ' + str(self.getPrice())+" " + self.__batterySize ) 
+        #Format the description and display
+        output = f"{self.getMake():<10} {self.getModel():<10} {self.getYear():<10} {self.getStockId():<10} {self.getVin():<15} {self.getVehicleType():<10} {self.getOdometer():<10} {self.getPrice():<10} {self.__batterySize:<10}"
+        print(output)
+
         
 
 
@@ -116,9 +120,10 @@ class HybridVehicle(Vehicle):
         self.__mpg = mpg
 
     def showDescription(self):
-        print (self.getMake() + '     ' + self.getModel() + "       " + str (self.getYear()) + "     " + str(self.getStockId()) + '      ' + self.getVin() + '     ' + self.getVehicleType() + '  ' + 
-               str(self.getOdometer()) + '   ' + str(self.getPrice())+"                             " +str( self.__mpg) ) 
-        
+        #Format the description and display
+        output = f"{self.getMake():<10} {self.getModel():<10} {self.getYear():<10} {self.getStockId():<10} {self.getVin():<15} {self.getVehicleType():<10} {self.getOdometer():<10} {self.getPrice():<10} {' ':<10} {self.__mpg}"
+        print(output)
+
 
 def getInput():
     while True:
@@ -156,8 +161,9 @@ def addInventory(list):
     print ('Vehicle successfully added: ' +" " + new_vehicle.getYear() + ' ' + new_vehicle.getMake() + " " + new_vehicle.getModel())
 
 def dispInventory(list):
-    print ('                                VEHICLE INVENTORY REPORT                            ')
-    print ('Make     Model       Year    stock  ID          VIN           Type           Odometer       Price    Battery    MPG')
+    print ('  {                              VEHICLE INVENTORY REPORT                            ')
+    print(f"{'Make':<10} {'Model':<10} {'Year':<10} {'stock  ID':<10} {'VIN':<15} {'Type':<10} {'Odometer':<10} {'Price':<10} {'Battery':<10} {'MPG'}")
+
     for item in list:
         if item.getVehicleType() == 'R':  #Display the details of a regular vehicle if the item is a regular vehicle
             new_vehicle = Vehicle(item.getStockId(), item.getVin(), item.getVehicleType(), item.getYear(), item.getMake(), item.getModel(), item.getOdometer(), item.getPrice())
