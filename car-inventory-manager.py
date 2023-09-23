@@ -195,7 +195,6 @@ def updatePrice(list):
             inventory_numbers = []
             for item in list:
                 inventory_numbers.append(int(item.getStockId()))
-            print (inventory_numbers)
             if inventory_id not in inventory_numbers:
                 raise ValueError ('Invalid inventory number. Please enter a valid inventory number.')
             # If the input is valid, break out of the loop
